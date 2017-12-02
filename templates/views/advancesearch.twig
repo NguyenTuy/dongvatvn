@@ -1,0 +1,76 @@
+{% extends "../layouts/default.twig" %}
+
+{% block content %}
+	<div class="container">
+
+    <p>Vui lòng nhập nội dung chi tiết của động vật vào ô bên dưới để tìm kiếm. <BR>Các nội dung này không bắt buộc phải điền đầy đủ mà chỉ cần ít nhất 1 trường có nội dung thì có thể tìm kiếm được.</p>
+
+    <div class="col-sm-12 col-md-12"  style="padding-left: 0px;">
+        <form role = "form"  method="post">
+           <input type="hidden" name="action" value="search">
+           <div class = "form-group" style="margin-top: 5px;">
+              <label class="col-sm-12 col-md-5"  style="padding-left: 0px;" for = "taxa">Phân loại <span class="text-muted">(Ví dụ: Cá sấu, thằng lằn, rắn)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "taxa" name="taxa" value="{{ data.taxa }}" placeholder = "">
+           </div>
+
+           <div style="margin-top: 10px;">
+              <label class="col-sm-12 col-md-5" style="padding-left: 0px;" for = "genus">Chi <span class="text-muted">(Ví dụ: Tắc kè, Oligodon)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "genus" name = "genus" value="{{ data.genus }}" placeholder = "">
+           </div>
+
+           <div class = "form-group" style="margin-top: 5px;">
+              <label class="col-sm-12 col-md-5" style="padding-left: 0px;" for = "epithet">Loài <span class="text-muted">(Ví dụ: elegans, ornatus)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "epithet" name = "epithet" value="{{ data.epithet }}" placeholder = "">
+           </div>
+
+           <div class = "form-group" style="margin-top: 5px;">
+              <label class="col-sm-12 col-md-5" style="padding-left: 0px;" for = "subspecies">Phân loài <span class="text-muted">(Ví dụ: Ablepharus bivittatus lindbergi)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "subspecies" name = "subspecies" value="{{ data.subspecies }}" placeholder = "">
+           </div>
+
+           <div class = "form-group" style="display:none">
+              <label class="col-sm-12 col-md-5" style="padding-left: 0px;" for = "author">Tác giả <span class="text-muted">(Ví dụ: Boulenger, Linnaeus)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "author" name = "author" value="{{ data.author }}" placeholder = "">
+           </div>
+
+           <div class = "form-group" style="display:none">
+              <label class="col-sm-12 col-md-5" style="padding-left: 0px;" for = "year">Năm <span class="text-muted">(Ví dụ: 2006)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "year" name = "year" value="{{ data.year }}" placeholder = "">
+           </div>
+
+           <div class = "form-group" style="margin-top: 5px;">
+              <label class="col-sm-12 col-md-5" style="padding-left: 0px;" for = "commonname">Tên thông dụng <span class="text-muted">(Ví dụ: Tắc kè hoa, Rắn mái gầm)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "commonname" name = "commonname" value="{{ data.commonname }}" placeholder = "">
+           </div>
+
+           <div class = "form-group" style="margin-top: 5px;">
+              <label class="col-sm-12 col-md-5" style="padding-left: 0px;" for = "distribution">Phân bố <span class="text-muted">(Ví dụ: Tây Bắc, Tây Nguyên)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "distribution" name = "distribution" value="{{ data.distribution }}" placeholder = "">
+           </div>
+
+           <div class = "form-group" style="display:none">
+              <label class="col-sm-12 col-md-5" style="padding-left: 0px;" for = "type">Loại <span class="text-muted">(Ví dụ: USNM 6769)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "type" name = "type" value="{{ data.type }}" placeholder = "">
+           </div>
+
+           <div class = "form-group" style="margin-top: 5px;">
+              <label class="col-sm-12 col-md-5" style="padding-left: 0px;" for = "reference">Tham khảo <span class="text-muted">(Ví dụ: Tác giả, tiêu đề)</span></label>
+              <input type = "text" class = "col-sm-12 col-md-3" id = "reference" name = "reference" value="{{ data.reference }}" placeholder = "">
+           </div>
+
+           <div class="col-sm-12 col-md-8"  style="padding-right: 0px;">
+                <button type = "submit" class="btn btn-primary btn-lg" style="float:right;">Tìm kiếm</button>
+           </div>
+        </form>
+    </div>
+
+    {% if searchStarted != 0 %}
+        <h4> Tìm thấy {{resultLength}} kết quả. </h4>
+        {% set idx = 1 %}
+        {% for result in searchResults %}
+            <p><a href="/animal/{{ result.slug }}"> {{ idx }}. {{ result.scienceName }}</a> </p>
+            {% set idx = idx + 1 %}
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

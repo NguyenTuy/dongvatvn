@@ -1,0 +1,94 @@
+{% extends "../layouts/default.twig" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% if enquirySubmitted %}
+			<h3>Cảm ơn bạn đã liên lạc. Chúng tôi sẽ trả lời sớm nhất có thể.</h3>
+		{% else %}
+			<div class="row">
+				<div class="col-sm-10 col-md-4">
+					<form method="post" role = "form">
+						<input type="hidden" name="action" value="contact">
+						{% set className = "" %}
+						{% if validationErrors.name %}
+							{% set className = "has-error" %}
+						{% endif %}
+						<div class="form-group {{ className }}">
+							<label class="control-label">
+								<span>Họ tên</span>
+							</label>
+							<input type="text" name="name.full" value="{{ formData['name.full'] | default('') }}" class="form-control">
+						</div>
+						{% set className = "" %}
+						{% if validationErrors.email %}
+							{% set className = "has-error" %}
+						{% endif %}
+						<div class="form-group {{ className }}">
+							<label class="control-label">
+								<span>Địa chỉ email</span>
+								
+							</label>
+							<input type="email" name="email" value="{{ formData.email | default('') }}" class="form-control">
+						</div>
+						<div class="form-group">
+							<label class="control-label">
+								<span>Số điện thoại</span>
+								
+							</label>
+							<input type="text" name="phone" value="{{ formData.phone | default('') }}" placeholder="(Không bắt buộc)" class="form-control">
+						</div>
+						{% set className = "" %}
+						{% if validationErrors.enquiryType %}
+							{% set className = "has-error" %}
+						{% endif %}
+						<div class="form-group {{ className }}">
+							<label class="control-label">
+								<span>Vấn đề bạn cần liên lạc</span>
+							</label>
+							<select name="enquiryType" class="form-control">
+									<option value="">(Chọn một)</option>
+									{% set idx = 0 %}
+									{% for type in enquiryTypes %}
+										{% set selected = "" %}
+										{% if formData.enquiryType == type.value %}
+											{% set selected = " selected" %}
+										{% endif %}
+										{% if idx == 0 %}
+											<option value="{{ type.value }}"{{ selected }}>Để lại tin nhắn</option>
+										{% endif %}
+										{% if idx == 1 %}
+											<option value="{{ type.value }}"{{ selected }}>Để lại câu hỏi</option>
+										{% endif %}
+										{% if idx == 2 %}
+											<option value="{{ type.value }}"{{ selected }}>Nội dung khác</option>
+										{% endif %}
+										{% set idx = idx + 1 %}
+										
+									{% endfor %}
+								</select>
+						</div>
+						{% set className = "" %}
+						{% if validationErrors.message %}
+							{% set className = "has-error" %}
+						{% endif %}
+						<div class="form-group {{ className }}">
+							<label class="control-label">
+								<span>Nội dung liên lạc</span>
+								
+							</label>
+							<textarea name="message" placeholder="Để lại tin nhắn..." rows="4" class="form-control">
+									{{ formData.message }}
+								</textarea>
+						</div>
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">Gửi</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

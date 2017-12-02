@@ -1,0 +1,39 @@
+{% extends "../layouts/default.twig" %}
+{% block content %}
+<div class="container">
+	<div class = "jumbotron" style="padding-bottom: 95px;">
+		<div class="col-sm-0 col-md-2">
+		</div>
+		<div  class="col-sm-12 col-md-8">
+			<form method="post" role = "form">
+				<input type="hidden" name="action" value="search">
+				<div  class = "col-sm-8 col-md-10">
+					<input type = "text" name="search" id = "search" style="width: 100%; height:48px" placeholder 
+					= "Nhập từ khóa tìm kiếm" value="{{ searchKey }}">
+				</div>
+				<div class = "col-sm-4 col-md-2">
+					<button type="submit" class="btn btn-primary btn-lg">Tìm kiếm</button>
+			    </div>
+		    </form>
+		</div>
+		<div class="col-sm-0 col-md-2" style="padding-bottom: 45px;">
+		</div>
+	</div>
+   
+   {% if searchStarted != 1 %}
+	<div>
+	    <h2>Hướng dẫn tìm kiếm</h2>&nbsp;
+	    <p>Để dể dàng tra cứu thông tin, các bạn vui lòng nhập từ khóa vào ô tìm kiếm , từ khóa là từ có liên quan gần gũi nhất có thể, VÍ DỤ : muốn tìm kiếm một loài rắn, gõ chữ "rắn" , tìm một loài thú họ chồn, gõ chữ "chồn" ...
+
+Một khi để kiểm chứng lại thông tin về một loài động vật bạn đã cho rằng mình biết tên, hãy tìm bằng từ khóa gần hơn, ví dụ, một loài rắn trông giống rắn hổ, bạn search "rắn hổ" , kết quả tìm sẽ ra luôn các gợi ý có liên quan rắn hổ.</p>
+	</div>
+	{% else %}
+		<h4> Tìm thấy {{resultLength}} kết quả. </h4>
+		{% set idx = 1 %}
+		{% for result in searchResults %}
+			<p><a href="/animal/{{ result.slug }}"> {{ idx }}. {{ result.scienceName }}</a> </p>
+			{% set idx = idx + 1 %}
+		{% endfor %}
+	{% endif %}
+</div>
+{% endblock %}

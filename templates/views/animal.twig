@@ -1,0 +1,146 @@
+{% extends "../layouts/default.twig" %}
+{% block css %}
+<!--///////////////////////////////////////////////////////////////////////////////////////////////////
+	//
+	//		Styles
+	//
+	///////////////////////////////////////////////////////////////////////////////////////////////////-->
+	<link rel='stylesheet' id='camera-css'  href='/styles/plugin_gallery/camera.css' type='text/css' media='all'>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		a {
+			color: #09f;
+		}
+		a:hover {
+			text-decoration: none;
+		}
+		#back_to_camera {
+			clear: both;
+			display: block;
+			height: 80px;
+			line-height: 40px;
+			padding: 20px;
+		}
+		.fluid_container {
+			margin: 0 auto;
+			max-width: 1000px;
+			width: 90%;
+		}
+	</style>
+
+	<!--///////////////////////////////////////////////////////////////////////////////////////////////////
+	//
+	//		Scripts
+	//
+	///////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+	<script type='text/javascript' src='/js/plugin_gallery/jquery.min.js'></script>
+	<script type='text/javascript' src='/js/plugin_gallery/jquery.mobile.customized.min.js'></script>
+	<script type='text/javascript' src='/js/plugin_gallery/jquery.easing.1.3.js'></script>
+	<script type='text/javascript' src='/js/plugin_gallery/camera.min.js'></script>
+
+	<script>
+		$(document).ready(function(){
+			$('#camera_wrap_2').camera({
+				height: '400px',
+				loader: 'bar',
+				pagination: false,
+				thumbnails: true
+			});
+		});
+	</script>
+{% endblock %}
+{% block content %}
+	<div class="container">
+		{% if not data.animal %}
+			<h2>Không tìm thấy thông tin của động vật.</h2>
+		{% else %}
+		  <div class="row">
+					<div class="col-sm-12 col-md-6 fluid_container">
+							<div class="camera_wrap camera_magenta_skin" id="camera_wrap_2">
+									<div data-thumb="/images/plugin_gallery/slides/thumbs/bridge.jpg" data-src="/images/plugin_gallery/slides/bridge.jpg">
+											<div class="camera_caption fadeFromBottom">
+													Camera is a responsive/adaptive slideshow. <em>Try to resize the browser window</em>
+											</div>
+									</div>
+									<div data-thumb="/images/plugin_gallery/slides/thumbs/leaf.jpg" data-src="/images/plugin_gallery/slides/leaf.jpg">
+											<div class="camera_caption fadeFromBottom">
+													It uses a light version of jQuery mobile, <em>navigate the slides by swiping with your fingers</em>
+											</div>
+									</div>
+									<div data-thumb="/images/plugin_gallery/slides/thumbs/road.jpg" data-src="/images/plugin_gallery/slides/road.jpg">
+											<div class="camera_caption fadeFromBottom">
+													<em>It's completely free</em> (even if a donation is appreciated)
+											</div>
+									</div>
+									<div data-thumb="/images/plugin_gallery/slides/thumbs/sea.jpg" data-src="/images/plugin_gallery/slides/sea.jpg">
+											<div class="camera_caption fadeFromBottom">
+													Camera slideshow provides many options <em>to customize your project</em> as more as possible
+											</div>
+									</div>
+									<div data-thumb="/images/plugin_gallery/slides/thumbs/shelter.jpg" data-src="/images/plugin_gallery/slides/shelter.jpg">
+											<div class="camera_caption fadeFromBottom">
+													It supports captions, HTML elements and videos and <em>it's validated in HTML5</em> (<a href="http://validator.w3.org/check?uri=http%3A%2F%2Fwww.pixedelic.com%2Fplugins%2Fcamera%2F&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0&amp;user-agent=W3C_Validator%2F1.2" target="_blank">have a look</a>)
+											</div>
+									</div>
+									<div data-thumb="/images/plugin_gallery/slides/thumbs/tree.jpg" data-src="/images/plugin_gallery/slides/tree.jpg">
+											<div class="camera_caption fadeFromBottom">
+													Different color skins and layouts available, <em>fullscreen ready too</em>
+											</div>
+									</div>
+							</div><!-- #camera_wrap_2 -->
+					</div>
+					<div class="col-sm-12 col-md-6">
+
+					</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">Higher Taxa</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.higherTaxa }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">Sub Species</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.subSpecies }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">Common Name</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.commonName }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">Synonym</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.synonym }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">Distribution</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.distribution }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">Reproduction</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.reproduction }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">Types</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.types }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">Comments</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.comments }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">References</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.references }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">External_link</div>
+				  <div class="col-sm-12 col-md-8">{{ data.animal.external_link }}</div>
+			</div>
+			<div class="row top-margin">
+				  <div class="col-sm-12 col-md-2 bold-label">Images</div>
+				  <div class="col-sm-12 col-md-8"> </div>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

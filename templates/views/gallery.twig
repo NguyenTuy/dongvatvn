@@ -1,0 +1,29 @@
+{% extends "../layouts/default.twig" %}
+
+{% block intro %}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		{% if galleries.length %}
+			{% for gallery in galleries %}
+				<div class="col-sm-4 col-md-4 gallery-image">
+					<h2>{{ gallery.name }}
+					</h2>
+					{% if gallery.publishedDate %}
+							<p class="">{{ gallery.publishedDate|date("d M Y") }}</p>
+					{% endif %}
+					<div class="row gallery-images">
+						{% if gallery.heroImage.exists %}
+							<div class="col-sm-12 col-md-12 gallery-image">
+								<img src="{{ gallery._.heroImage.limit(680,680) }}" class="img-rounded">
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			{% endfor %}
+		{% else %}
+			<h3 class="text-muted">There are no image galleries yet.</h3>
+		{% endif %}
+	</div>
+{% endblock %}
