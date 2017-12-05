@@ -749,8 +749,10 @@ p {
 /*-- newsletter --*/
 .subscribe{  
 	text-align:center;
-	background: url(../images/1.jpg)no-repeat center bottom fixed;
-	background-size:cover;
+    /*Tampm comment start*/
+	/*background: url(../images/1.jpg)no-repeat center bottom fixed;*/
+	/*background-size:cover;*/
+    /*Tampm comment end*/
 }
 .sub-agileinfo{
     background:rgba(0, 0, 0, 0.65);
